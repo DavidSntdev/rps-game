@@ -43,6 +43,8 @@ function Game({
           escolhaJ1={escolhaJ1}
           escolhaJ2={escolhaJ2}
           setJogoAtivo={setJogoAtivo}
+          score={score}
+          setScore={setScore}
         />
       ) : (
         <GamePlayJ1
