@@ -7,7 +7,8 @@ import paper from "../assets/images/icon-paper.svg";
 import rock from "../assets/images/icon-rock.svg";
 import scissor from "../assets/images/icon-scissors.svg";
 import spock from "../assets/images/icon-spock.svg";
-import rules from "../assets/images/image-rules-bonus.svg";
+import rules from "../assets/images/image-rules.svg";
+import rulesBonus from "../assets/images/image-rules-bonus.svg";
 import logoBonus from "../assets/images/logo-bonus.svg";
 
 export const data = {
@@ -22,7 +23,8 @@ export const data = {
 
 export const dataBonus = {
   bgPentagon: pentagon,
-  iconLogoBonus: logoBonus,
+  iconLogo: logoBonus,
   iconLizard: lizard,
   iconSpock: spock,
+  rules: rulesBonus,
 };
