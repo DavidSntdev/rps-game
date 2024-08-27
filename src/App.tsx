@@ -2,6 +2,7 @@ import { useState } from "react";
 import Game from "./components/Game";
 import { data } from "./data/data";
 import { Button } from "@nextui-org/react";
+import { motion, AnimatePresence } from "framer-motion";
 
 function App() {
   const [isRulesActive, setRulesActive] = useState<boolean>(false);
@@ -21,44 +22,52 @@ function App() {
         backgroundColor: isRulesActive ? "rgba(255, 255, 255, 0.920" : "",
       }}
     >
-      {isRulesActive ? (
-        <>
-          <h1 className="font-bold text-4xl pt-20 text-slate-950">RULES</h1>
-          <div>
-            <img src={data.imgRules} alt="rules" />
-          </div>
-          <Button
-            isIconOnly
-            className="border-0"
-            variant="faded"
-            aria-label="Close rules"
-            onClick={activeRules}
+      <AnimatePresence>
+        {isRulesActive ? (
+          <motion.div
+            key="rules"
+            className="flex flex-col items-center justify-between h-screen w-screen py-20"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <img src={data.iconClose} alt="close rules" />
-          </Button>
-        </>
-      ) : (
-        <>
-          <Game
-            score={score}
-            setScore={setScore}
-            isJogoAtivo={isJogoAtivo}
-            setJogoAtivo={setJogoAtivo}
-            escolhaJ1={escolhaJ1}
-            setEscolhaJ1={setEscolhaJ1}
-            escolhaJ2={escolhaJ2}
-            setEscolhaJ2={setEscolhaJ2}
-          />
-          <Button
-            className="mb-8 px-8 py-2 rounded-lg text-[rgba(255, 255, 255, 0.692)] border-[rgba(255, 255, 255, 0.692)]"
-            color="primary"
-            variant="ghost"
-            onClick={activeRules}
-          >
-            R U L E S
-          </Button>
-        </>
-      )}
+            <h1 className="font-bold text-4xl text-slate-950">RULES</h1>
+            <div>
+              <img src={data.imgRules} alt="rules" />
+            </div>
+            <Button
+              isIconOnly
+              className="border-0"
+              variant="faded"
+              aria-label="Close rules"
+              onClick={activeRules}
+            >
+              <img src={data.iconClose} alt="close rules" />
+            </Button>
+          </motion.div>
+        ) : (
+          <>
+            <Game
+              score={score}
+              setScore={setScore}
+              isJogoAtivo={isJogoAtivo}
+              setJogoAtivo={setJogoAtivo}
+              escolhaJ1={escolhaJ1}
+              setEscolhaJ1={setEscolhaJ1}
+              escolhaJ2={escolhaJ2}
+              setEscolhaJ2={setEscolhaJ2}
+            />
+            <Button
+              className="mb-8 px-8 py-2 rounded-lg text-[rgba(255, 255, 255, 0.692)] border-[rgba(255, 255, 255, 0.692)]"
+              color="primary"
+              variant="ghost"
+              onClick={activeRules}
+            >
+              R U L E S
+            </Button>
+          </>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
