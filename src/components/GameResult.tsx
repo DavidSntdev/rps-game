@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { iconEscolha, corEscolha } from "./utils/escolhas";
 import { resultado, winorlose } from "./utils/game";
 import { Button } from "@nextui-org/react";
+import { motion } from "framer-motion";
 
 interface GameResultProps {
   escolhaJ1: string;
@@ -20,7 +21,6 @@ function GameResult({
 }: GameResultProps) {
   const [isGameover, setGameover] = useState<boolean>(false);
   const [showEscolhaJ2, setShowEscolhaJ2] = useState<boolean>(false);
-  const [showGameOver, setShowGameOver] = useState<boolean>(false);
   const [borderColor, setBorderColor] = useState<string>("");
 
   useEffect(() => {
@@ -35,7 +35,6 @@ function GameResult({
   useEffect(() => {
     if (showEscolhaJ2) {
       const gameOverTimer = setTimeout(() => {
-        setShowGameOver(true);
         setGameover(true);
       }, 500);
 
@@ -63,38 +62,50 @@ function GameResult({
             <p>P I C K E D</p>
           </div>
         </div>
-        <div className="flex flex-col items-center gap-5">
-          <div
-            className={`w-32 h-32 rounded-[50%] flex justify-center items-center transition-all transform duration-[650ms] ${
-              showEscolhaJ2
-                ? "scale-100 border-[1rem] bg-white"
-                : "scale-50 bg-[var(--colorShadow)]"
-            }`}
+
+        <motion.div
+          className="flex flex-col items-center gap-5"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 1.5 }}
+        >
+          <motion.div
+            className={`w-32 h-32 rounded-[50%] flex justify-center items-center bg-white border-[1rem]`}
             style={{ borderColor: borderColor }}
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{
+              scale: showEscolhaJ2 ? 1 : 0.5,
+              opacity: showEscolhaJ2 ? 1 : 0,
+            }}
+            transition={{ duration: 0.8 }}
           >
             {showEscolhaJ2 && (
-              <img
+              <motion.img
                 src={iconEscolha(escolhaJ2)}
                 alt={`Escolha ${escolhaJ2}`}
                 className="transition-opacity duration-1000"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
               />
             )}
-          </div>
+          </motion.div>
           <div className="flex flex-wrap gap-2 justify-center">
             <p>T H E</p>
             <p>H O U S E</p>
             <p>P I C K E D</p>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {isGameover && (
-        <div
-          className={`flex flex-col items-center justify-center gap-6 duration-1000 ease-in-out transform translate-y-8 animate-slide-fade-in ${
-            showGameOver ? "opcaity-100" : "opacity-0"
-          }`}
+        <motion.div
+          className="flex flex-col items-center justify-center gap-6"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.25 }}
         >
-          <p className="text-6xl text-slate-100 animate-fade-in">
+          <p className="text-6xl text-slate-100">
             {resultado(escolhaJ1, escolhaJ2)}
           </p>
           <Button
@@ -107,7 +118,7 @@ function GameResult({
             <p className="text-[--colorShadow] font-bold">P L A Y</p>
             <p className="text-[--colorShadow] font-bold">A G A I N</p>
           </Button>
-        </div>
+        </motion.div>
       )}
     </>
   );
