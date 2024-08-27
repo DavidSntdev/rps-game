@@ -20,13 +20,14 @@ function GameResult({
 }: GameResultProps) {
   const [isGameover, setGameover] = useState<boolean>(false);
   const [showEscolhaJ2, setShowEscolhaJ2] = useState<boolean>(false);
+  const [showGameOver, setShowGameOver] = useState<boolean>(false);
   const [borderColor, setBorderColor] = useState<string>("");
 
   useEffect(() => {
     const showEscolhaTimer = setTimeout(() => {
       setShowEscolhaJ2(true);
       setBorderColor(corEscolha(escolhaJ2));
-    }, 1000);
+    }, 1500);
 
     return () => clearTimeout(showEscolhaTimer);
   }, [escolhaJ2]);
@@ -34,8 +35,9 @@ function GameResult({
   useEffect(() => {
     if (showEscolhaJ2) {
       const gameOverTimer = setTimeout(() => {
+        setShowGameOver(true);
         setGameover(true);
-      }, 1000);
+      }, 500);
 
       return () => clearTimeout(gameOverTimer);
     }
@@ -51,7 +53,7 @@ function GameResult({
       <div className="flex justify-center items-start gap-12">
         <div className="flex flex-col items-center gap-5">
           <div
-            className="w-32 bg-white h-32 rounded-[50%] flex justify-center items-center border-[1rem]"
+            className="w-32 bg-white h-32 rounded-[50%] flex justify-center items-center border-[1rem] transition-all transform duration-500"
             style={{ borderColor: corEscolha(escolhaJ1) }}
           >
             <img src={iconEscolha(escolhaJ1)} alt={`Escolha ${escolhaJ1}`} />
@@ -63,13 +65,19 @@ function GameResult({
         </div>
         <div className="flex flex-col items-center gap-5">
           <div
-            className={`w-32 bg-white h-32 rounded-[50%] flex justify-center items-center border-[1rem] transition-all duration-1500 ${
-              showEscolhaJ2 ? "opacity-100" : "opacity-0"
+            className={`w-32 h-32 rounded-[50%] flex justify-center items-center transition-all transform duration-[650ms] ${
+              showEscolhaJ2
+                ? "scale-100 border-[1rem] bg-white"
+                : "scale-50 bg-[var(--colorShadow)]"
             }`}
             style={{ borderColor: borderColor }}
           >
             {showEscolhaJ2 && (
-              <img src={iconEscolha(escolhaJ2)} alt={`Escolha ${escolhaJ2}`} />
+              <img
+                src={iconEscolha(escolhaJ2)}
+                alt={`Escolha ${escolhaJ2}`}
+                className="transition-opacity duration-1000"
+              />
             )}
           </div>
           <div className="flex flex-wrap gap-2 justify-center">
@@ -79,9 +87,14 @@ function GameResult({
           </div>
         </div>
       </div>
+
       {isGameover && (
-        <div className="flex flex-col items-center justify-center gap-6">
-          <p className="text-6xl text-slate-100">
+        <div
+          className={`flex flex-col items-center justify-center gap-6 duration-1000 ease-in-out transform translate-y-8 animate-slide-fade-in ${
+            showGameOver ? "opcaity-100" : "opacity-0"
+          }`}
+        >
+          <p className="text-6xl text-slate-100 animate-fade-in">
             {resultado(escolhaJ1, escolhaJ2)}
           </p>
           <Button
