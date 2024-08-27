@@ -1,5 +1,5 @@
 export const styleBackground = (image: string) => {
-  const backgroundSize = window.innerWidth > 1024 ? "250px" : "230px";
+  const backgroundSize = window.innerWidth > 1024 ? "300px" : "230px";
 
   return {
     backgroundImage: `url(${image})`,
