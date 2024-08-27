@@ -21,19 +21,19 @@ function GamePlayJ1({
 
   return (
     <div
-      className="w-full h-72 flex flex-col justify-between"
+      className="w-full h-72 lg:h-[450px] flex flex-col justify-between"
       style={styleBackground(data.bgTriangle)}
     >
       <div className="flex justify-center w-full">
-        <div className="flex justify-between min-w-[300px]">
+        <div className="flex justify-between min-w-[300px] lg:w-[500px]">
           <button
-            className="w-32 bg-white h-32 rounded-[50%] flex justify-center items-center border-[1rem] border-[var(--colorPaper)] transition transform hover:scale-110 active:scale-90"
+            className="w-32 lg:w-56 bg-white h-32 lg:h-56 rounded-[50%] flex justify-center items-center border-[1rem] lg:border-[2rem] border-[var(--colorPaper)] transition transform hover:scale-110 active:scale-90 shadow-inner shadow-[var(--colorHeaderOutline)]"
             onClick={() => escolher("papel")}
           >
             <img src={data.iconPaper} alt="Paper" />
           </button>
           <button
-            className="w-32 bg-white h-32 rounded-[50%] flex justify-center items-center border-[1rem] border-[var(--colorScissors)] transition transform hover:scale-110 active:scale-90"
+            className="w-32 lg:w-56 bg-white h-32 lg:h-56 rounded-[50%] flex justify-center items-center border-[1rem] lg:border-[2rem] border-[var(--colorScissors)] transition transform hover:scale-110 active:scale-90 shadow-inner shadow-[var(--colorHeaderOutline)]"
             onClick={() => escolher("tesoura")}
           >
             <img src={data.iconScissor} alt="Scissors" />
@@ -42,7 +42,7 @@ function GamePlayJ1({
       </div>
       <div className="flex justify-center">
         <button
-          className="w-32 bg-white h-32 rounded-[50%] flex justify-center items-center border-[1rem] border-[var(--colorRock)] transition transform hover:scale-110 active:scale-90"
+          className="w-32 lg:w-56 bg-white h-32 lg:h-56 rounded-[50%] flex justify-center items-center border-[1rem] lg:border-[2rem] border-[var(--colorRock)] transition transform hover:scale-110 active:scale-90 shadow-inner shadow-[var(--colorHeaderOutline)]"
           onClick={() => escolher("pedra")}
         >
           <img src={data.iconRock} alt="pedra" />

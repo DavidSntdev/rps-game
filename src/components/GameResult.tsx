@@ -47,12 +47,14 @@ function GameResult({
     winorlose(escolhaJ1, escolhaJ2, score, setScore);
   };
 
+  const widthDesktop = window.innerWidth > 1024;
+
   return (
     <>
       <div className="flex justify-center items-start gap-12">
         <div className="flex flex-col items-center gap-5">
           <div
-            className="w-32 bg-white h-32 rounded-[50%] flex justify-center items-center border-[1rem] transition-all transform duration-500"
+            className="w-32 bg-white h-32 rounded-[50%]  lg:w-56 lg:h-56 lg:border-[2rem] flex justify-center items-center border-[1rem] transition-all transform duration-500 shadow-inner shadow-[var(--colorHeaderOutline)]"
             style={{ borderColor: corEscolha(escolhaJ1) }}
           >
             <img src={iconEscolha(escolhaJ1)} alt={`Escolha ${escolhaJ1}`} />
@@ -62,7 +64,28 @@ function GameResult({
             <p>P I C K E D</p>
           </div>
         </div>
-
+        {widthDesktop && isGameover && (
+          <motion.div
+            className="flex flex-col items-center justify-center self-center mx-10 gap-6"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+          >
+            <p className="text-6xl text-slate-100">
+              {resultado(escolhaJ1, escolhaJ2)}
+            </p>
+            <Button
+              color="primary"
+              variant="solid"
+              radius="sm"
+              className="px-16 bg-slate-200 font-bold"
+              onClick={terminarJogo}
+            >
+              <p className="text-[--colorShadow] font-bold">P L A Y</p>
+              <p className="text-[--colorShadow] font-bold">A G A I N</p>
+            </Button>
+          </motion.div>
+        )}
         <motion.div
           className="flex flex-col items-center gap-5"
           initial={{ opacity: 0, scale: 0.5 }}
@@ -70,7 +93,7 @@ function GameResult({
           transition={{ duration: 0.8, delay: 1.5 }}
         >
           <motion.div
-            className={`w-32 h-32 rounded-[50%] flex justify-center items-center bg-white border-[1rem]`}
+            className={`w-32 h-32 rounded-[50%] lg:w-56 lg:h-56 lg:border-[2rem] flex justify-center items-center bg-white border-[1rem] shadow-inner shadow-[var(--colorHeaderOutline)]`}
             style={{ borderColor: borderColor }}
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{
@@ -97,8 +120,7 @@ function GameResult({
           </div>
         </motion.div>
       </div>
-
-      {isGameover && (
+      {!widthDesktop && isGameover && (
         <motion.div
           className="flex flex-col items-center justify-center gap-6"
           initial={{ opacity: 0, y: 50 }}

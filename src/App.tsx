@@ -17,7 +17,7 @@ function App() {
 
   return (
     <main
-      className="h-screen flex flex-col justify-between items-center p-10"
+      className={"h-screen flex flex-col justify-between items-center p-10"}
       style={{
         backgroundColor: isRulesActive ? "rgba(255, 255, 255, 0.920" : "",
       }}
@@ -58,7 +58,7 @@ function App() {
               setEscolhaJ2={setEscolhaJ2}
             />
             <Button
-              className="mb-8 px-8 py-2 rounded-lg text-[rgba(255, 255, 255, 0.692)] border-[rgba(255, 255, 255, 0.692)]"
+              className="mb-8 px-8 py-2 lg:px-12 lg:mb-0 rounded-lg text-[rgba(255, 255, 255, 0.692)] border-[rgba(255, 255, 255, 0.692)] md:self-end"
               color="primary"
               variant="ghost"
               onClick={activeRules}
