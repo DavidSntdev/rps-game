@@ -13,6 +13,7 @@ function GamePlayJ1({
   setEscolhaJ1,
   setEscolhaJ2,
 }: GamePlayJ1Props) {
+  console.log(styleBackground(data.bgTriangle));
   const escolher = (escolha: string) => {
     setEscolhaJ1(escolha);
     setJogoAtivo(true);
