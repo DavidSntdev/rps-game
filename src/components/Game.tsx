@@ -1,4 +1,4 @@
-import { data } from "../data/data";
+import { data, dataBonus } from "../data/data";
 import GamePlayJ1 from "./GamePlayJ1";
 import GameResult from "./GameResult";
 
@@ -31,7 +31,12 @@ function Game({
     <>
       <div className="flex justify-between w-full border-3 border-[var(--colorHeaderOutline)] p-3 lg:p-4 lg:px-5 rounded-2xl items-center lg:w-6/12 lg:h-40">
         <div className="p-2">
-          <img src={data.iconLogo} alt="" className="w-28 lg:w-44" />
+          {mode === "normal" && (
+            <img src={data.iconLogo} alt="" className="w-28 lg:w-44" />
+          )}
+          {mode === "bonus" && (
+            <img src={dataBonus.iconLogo} alt="" className="w-24 lg:w-32" />
+          )}
         </div>
         <div className="h-full bg-white flex flex-col w-24 items-center lg:w-40 justify-center lg:border-1 lg:border-black py-3 rounded-md shadow-sm shadow-neutral-950">
           <p className="text-[var(--colorScoreText)] text-xs font-bold lg:text-base">
