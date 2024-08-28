@@ -11,7 +11,7 @@ export const winorlose = (
       (j1 === "papel" && j2 === "pedra")
     ) {
       setScore(score + 1);
-    } else {
+    } else {  
       if (score > 0) {
         setScore(score - 1);
       }

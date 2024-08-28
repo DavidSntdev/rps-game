@@ -1,10 +1,10 @@
-import { useState } from "react";
-import Game from "./components/Game";
-import { data } from "./data/data";
-import { Button } from "@nextui-org/react";
 import { motion, AnimatePresence } from "framer-motion";
-import Settings from "./components/Settings";
+import { useState } from "react";
 import { GrClose } from "react-icons/gr";
+import { Button } from "@nextui-org/react";
+import { data, dataBonus } from "./data/data";
+import Game from "./components/Game";
+import Settings from "./components/Settings";
 
 function App() {
   const [isRulesActive, setRulesActive] = useState<boolean>(false);
@@ -13,10 +13,13 @@ function App() {
   const [escolhaJ1, setEscolhaJ1] = useState<string>("");
   const [escolhaJ2, setEscolhaJ2] = useState<string>("");
   const [language, setLanguage] = useState<string>("en");
+  const [mode, setMode] = useState<string>("normal");
 
   const activeRules = () => {
     setRulesActive(!isRulesActive);
   };
+
+  const imgRules = mode === "normal" ? data.imgRules : dataBonus.rules;
 
   return (
     <main
@@ -40,7 +43,7 @@ function App() {
               {language === "es" && "NORMAS"}
             </h1>
             <div>
-              <img src={data.imgRules} alt="rules" />
+              <img src={imgRules} alt="rules" />
             </div>
             <Button
               isIconOnly
@@ -64,9 +67,15 @@ function App() {
               escolhaJ2={escolhaJ2}
               setEscolhaJ2={setEscolhaJ2}
               language={language}
+              mode={mode}
             />
             <div className="flex gap-3 mb-8 px-8 py-2 lg:px-12 lg:mb-0 md:self-end">
-              <Settings setLanguage={setLanguage} language={language} />
+              <Settings
+                setLanguage={setLanguage}
+                language={language}
+                setMode={setMode}
+                mode={mode}
+              />
               <Button
                 color="primary"
                 variant="ghost"

@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
-import { iconEscolha, corEscolha } from "./utils/escolhas";
-import { resultado, winorlose } from "./utils/game";
+import {
+  iconEscolha,
+  corEscolha,
+  corEscolhaBonus,
+  iconEscolhaBonus,
+} from "./utils/escolhas";
+import { resultado, winorlose } from "./utils/gameNormal";
+import { resultadoBonus, winorloseBonus } from "./utils/gameBonus";
 import { Button } from "@nextui-org/react";
 import { motion } from "framer-motion";
 
@@ -11,6 +17,7 @@ interface GameResultProps {
   score: number;
   setScore: (score: number) => void;
   language: string;
+  mode: string;
 }
 
 function GameResult({
@@ -20,19 +27,30 @@ function GameResult({
   score,
   setScore,
   language,
+  mode,
 }: GameResultProps) {
   const [isGameover, setGameover] = useState<boolean>(false);
   const [showEscolhaJ2, setShowEscolhaJ2] = useState<boolean>(false);
   const [borderColor, setBorderColor] = useState<string>("");
+  const borderJ1 =
+    mode === "normal" ? corEscolha(escolhaJ1) : corEscolhaBonus(escolhaJ1);
+  const iconJ1 =
+    mode === "normal" ? iconEscolha(escolhaJ1) : iconEscolhaBonus(escolhaJ1);
+  const iconJ2 =
+    mode === "normal" ? iconEscolha(escolhaJ2) : iconEscolhaBonus(escolhaJ2);
 
   useEffect(() => {
     const showEscolhaTimer = setTimeout(() => {
       setShowEscolhaJ2(true);
-      setBorderColor(corEscolha(escolhaJ2));
+      if (mode === "normal") {
+        setBorderColor(corEscolha(escolhaJ2));
+      } else {
+        setBorderColor(corEscolhaBonus(escolhaJ2));
+      }
     }, 1500);
 
     return () => clearTimeout(showEscolhaTimer);
-  }, [escolhaJ2]);
+  }, [escolhaJ2, mode]);
 
   useEffect(() => {
     if (showEscolhaJ2) {
@@ -46,7 +64,11 @@ function GameResult({
 
   const terminarJogo = () => {
     setJogoAtivo(false);
-    winorlose(escolhaJ1, escolhaJ2, score, setScore);
+    if (mode === "normal") {
+      winorlose(escolhaJ1, escolhaJ2, score, setScore);
+    } else {
+      winorloseBonus(escolhaJ1, escolhaJ2, score, setScore);
+    }
   };
 
   const widthDesktop = window.innerWidth > 1024;
@@ -58,11 +80,11 @@ function GameResult({
           <div
             className="w-32 bg-white h-32 rounded-[50%]  lg:w-56 lg:h-56 lg:border-[1.8rem] flex justify-center items-center border-[1rem] transition-all transform duration-500 lg:shadow-[inset_0_10px_6px_-2px_var(--colorBtnShadow),0px_8px_10px_-6px_black] shadow-[inset_0_8px_6px_-2px_var(--colorBtnShadow),0px_5px_10px_-6px_black]"
             style={{
-              borderColor: corEscolha(escolhaJ1),
+              borderColor: borderJ1,
             }}
           >
             <img
-              src={iconEscolha(escolhaJ1)}
+              src={iconJ1}
               alt={`Escolha ${escolhaJ1}`}
               className="lg:w-[72px]"
             />
@@ -88,7 +110,9 @@ function GameResult({
             transition={{ duration: 1, delay: 0.5 }}
           >
             <p className="text-6xl text-slate-100">
-              {resultado(escolhaJ1, escolhaJ2, language)}
+              {mode === "normal"
+                ? resultado(escolhaJ1, escolhaJ2, language)
+                : resultadoBonus(escolhaJ1, escolhaJ2, language)}
             </p>
             <Button
               color="primary"
@@ -140,7 +164,7 @@ function GameResult({
           >
             {showEscolhaJ2 && (
               <motion.img
-                src={iconEscolha(escolhaJ2)}
+                src={iconJ2}
                 alt={`Escolha ${escolhaJ2}`}
                 className="transition-opacity duration-1000 lg:w-[72px]"
                 initial={{ scale: 0.5 }}
@@ -153,7 +177,7 @@ function GameResult({
             <p>
               {language === "en" && "T H E"}
               {language === "pt" && "A"}
-              {language === "en" && "L A"}
+              {language === "es" && "L A"}
             </p>
             <p>
               {language === "en" && "H O U S E"}
@@ -176,7 +200,9 @@ function GameResult({
           transition={{ duration: 1, delay: 0.25 }}
         >
           <p className="text-6xl text-slate-100">
-            {resultado(escolhaJ1, escolhaJ2, language)}
+            {mode === "normal"
+              ? resultado(escolhaJ1, escolhaJ2, language)
+              : resultadoBonus(escolhaJ1, escolhaJ2, language)}
           </p>
           <Button
             color="primary"

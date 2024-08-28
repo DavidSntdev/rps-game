@@ -3,15 +3,16 @@ import GamePlayJ1 from "./GamePlayJ1";
 import GameResult from "./GameResult";
 
 interface GameProps {
-  score: number;
   setScore: (score: number) => void;
-  isJogoAtivo: boolean;
   setJogoAtivo: (ativo: boolean) => void;
-  escolhaJ1: string;
   setEscolhaJ1: (escolha: string) => void;
-  escolhaJ2: string;
   setEscolhaJ2: (random: string) => void;
+  score: number;
+  isJogoAtivo: boolean;
+  escolhaJ1: string;
+  escolhaJ2: string;
   language: string;
+  mode: string;
 }
 
 function Game({
@@ -24,6 +25,7 @@ function Game({
   escolhaJ2,
   setEscolhaJ2,
   language,
+  mode,
 }: GameProps) {
   return (
     <>
@@ -50,12 +52,14 @@ function Game({
           score={score}
           setScore={setScore}
           language={language}
+          mode={mode}
         />
       ) : (
         <GamePlayJ1
           setJogoAtivo={setJogoAtivo}
           setEscolhaJ1={setEscolhaJ1}
           setEscolhaJ2={setEscolhaJ2}
+          mode={mode}
         />
       )}
     </>

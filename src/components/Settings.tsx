@@ -12,8 +12,8 @@ import { FaRobot, FaUserFriends } from "react-icons/fa";
 import {
   selectRobo,
   selectPVP,
-  selectBonus,
-  selectNormal,
+  modeNormal,
+  modeBonus,
   selectPort,
   selectEng,
   selectEsp,
@@ -22,13 +22,13 @@ import {
 interface SettingsProps {
   setLanguage: (value: string) => void;
   language: string;
+  setMode: (value: string) => void;
+  mode: string;
 }
 
-function Settings({ setLanguage, language }: SettingsProps) {
+function Settings({ setLanguage, language, setMode, mode }: SettingsProps) {
   const [selectedRobo, setSelectedRobo] = useState<boolean>(true);
   const [selectedPVP, setSelectedPVP] = useState<boolean>(false);
-  const [selectedNormal, setSelectedNormal] = useState<boolean>(true);
-  const [selectedBonus, setSelectedBonus] = useState<boolean>(false);
 
   return (
     <>
@@ -79,7 +79,7 @@ function Settings({ setLanguage, language }: SettingsProps) {
                   selectedRobo && "border-1 border-white"
                 }`,
               }}
-              onClick={() => selectRobo(setSelectedRobo, setSelectedRobo)}
+              onClick={() => selectRobo(setSelectedRobo, setSelectedPVP)}
             >
               {language === "en"
                 ? "Player vs Robot"
@@ -129,15 +129,15 @@ function Settings({ setLanguage, language }: SettingsProps) {
                 language === "en"
                   ? "Play classic mode"
                   : language === "pt"
-                  ? "Jogar modo clássico"
+                  ? "Jogar o modo clássico"
                   : "Jugar modo clásico"
               }
               classNames={{
                 base: `data-[selectable=true]:focus:bg-neutral-700 data-[hover=true]:bg-neutral-700 data-[focus-visible=true]:outline-white ${
-                  selectedNormal && "border-1 border-white"
+                  mode === "normal" && "border-1 border-white"
                 }`,
               }}
-              onClick={() => selectNormal(setSelectedNormal, setSelectedBonus)}
+              onClick={() => modeNormal(setMode)}
             >
               {language === "en"
                 ? "Normal Mode"
@@ -151,15 +151,15 @@ function Settings({ setLanguage, language }: SettingsProps) {
                 language === "en"
                   ? "Play new mode"
                   : language === "pt"
-                  ? "Jogar novo modo"
+                  ? "Jogar o novo modo"
                   : "Jugar nuevo modo"
               }
               classNames={{
                 base: `data-[selectable=true]:focus:bg-neutral-700 data-[hover=true]:bg-neutral-700 data-[focus-visible=true]:outline-white ${
-                  selectedBonus && "border-1 border-white"
+                  mode === "bonus" && "border-1 border-white"
                 }`,
               }}
-              onClick={() => selectBonus(setSelectedBonus, setSelectedNormal)}
+              onClick={() => modeBonus(setMode)}
             >
               {language === "en"
                 ? "Bonus Mode"

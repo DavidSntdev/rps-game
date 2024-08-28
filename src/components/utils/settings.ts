@@ -14,19 +14,11 @@ export const selectPVP = (
   robo(false);
 };
 
-export const selectNormal = (
-  normal: (value: boolean) => void,
-  bonus: (value: boolean) => void
-) => {
-  normal(true);
-  bonus(false);
+export const modeNormal = (mode: (value: string) => void) => {
+  mode("normal");
 };
-export const selectBonus = (
-  bonus: (value: boolean) => void,
-  normal: (value: boolean) => void
-) => {
-  bonus(true);
-  normal(false);
+export const modeBonus = (mode: (value: string) => void) => {
+  mode("bonus");
 };
 
 export const selectPort = (language: (value: string) => void) => {
