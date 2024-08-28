@@ -3,6 +3,8 @@ import Game from "./components/Game";
 import { data } from "./data/data";
 import { Button } from "@nextui-org/react";
 import { motion, AnimatePresence } from "framer-motion";
+import Settings from "./components/Settings";
+import { GrClose } from "react-icons/gr";
 
 function App() {
   const [isRulesActive, setRulesActive] = useState<boolean>(false);
@@ -17,9 +19,9 @@ function App() {
 
   return (
     <main
-      className={"h-screen flex flex-col justify-between items-center p-10"}
+      className={`h-screen flex flex-col justify-between items-center p-10`}
       style={{
-        backgroundColor: isRulesActive ? "rgba(255, 255, 255, 0.920" : "",
+        background: isRulesActive ? "var(--background-gradient)" : "",
       }}
     >
       <AnimatePresence>
@@ -31,18 +33,18 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="font-bold text-4xl text-slate-950">RULES</h1>
+            <h1 className="font-bold text-4xl text-slate-300">RULES</h1>
             <div>
               <img src={data.imgRules} alt="rules" />
             </div>
             <Button
               isIconOnly
-              className="border-0"
+              className="border-1 bg-transparent rounded-[50%]"
               variant="faded"
               aria-label="Close rules"
               onClick={activeRules}
             >
-              <img src={data.iconClose} alt="close rules" />
+              <GrClose size={20} />
             </Button>
           </motion.div>
         ) : (
@@ -57,14 +59,17 @@ function App() {
               escolhaJ2={escolhaJ2}
               setEscolhaJ2={setEscolhaJ2}
             />
-            <Button
-              className="mb-8 px-8 py-2 lg:px-12 lg:mb-0 rounded-lg text-[rgba(255, 255, 255, 0.692)] border-[rgba(255, 255, 255, 0.692)] md:self-end"
-              color="primary"
-              variant="ghost"
-              onClick={activeRules}
-            >
-              R U L E S
-            </Button>
+            <div className="flex gap-3 mb-8 px-8 py-2 lg:px-12 lg:mb-0 md:self-end">
+              <Settings />
+              <Button
+                color="primary"
+                variant="ghost"
+                onClick={activeRules}
+                className="rounded-lg text-[rgba(255, 255, 255, 0.692)] border-[rgba(255, 255, 255, 0.692)]"
+              >
+                R U L E S
+              </Button>
+            </div>
           </>
         )}
       </AnimatePresence>
