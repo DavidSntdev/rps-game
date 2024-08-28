@@ -25,7 +25,7 @@ function Game({
 }: GameProps) {
   return (
     <>
-      <div className="flex justify-between w-full border-3 border-[var(--colorHeaderOutline)] rounded-lg p-3 items-center lg:w-6/12 lg:h-40">
+      <div className="flex justify-between w-full border-3 border-[var(--colorHeaderOutline)] p-3 lg:p-4 lg:px-5 rounded-2xl items-center lg:w-6/12 lg:h-40">
         <div className="p-2">
           <img src={data.iconLogo} alt="" className="w-28 lg:w-44" />
         </div>
