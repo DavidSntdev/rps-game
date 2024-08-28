@@ -28,25 +28,25 @@ function GamePlayJ1({
       <div className="flex justify-center w-full">
         <div className="flex justify-between min-w-[300px] lg:w-[500px]">
           <button
-            className="w-32 lg:w-56 bg-white h-32 lg:h-56 rounded-[50%] flex justify-center items-center border-[1rem] lg:border-[2rem] border-[var(--colorPaper)] transition transform hover:scale-110 active:scale-90 shadow-inner shadow-[var(--colorHeaderOutline)]"
+            className="w-32 lg:w-52 bg-white h-32 lg:h-52 rounded-[50%] flex justify-center items-center border-[1rem] lg:border-[2rem] border-[var(--colorPaper)] transition transform hover:scale-110 active:scale-90 shadow-inner shadow-[var(--colorHeaderOutline)]"
             onClick={() => escolher("papel")}
           >
-            <img src={data.iconPaper} alt="Paper" />
+            <img src={data.iconPaper} className="lg:w-16" alt="Paper" />
           </button>
           <button
-            className="w-32 lg:w-56 bg-white h-32 lg:h-56 rounded-[50%] flex justify-center items-center border-[1rem] lg:border-[2rem] border-[var(--colorScissors)] transition transform hover:scale-110 active:scale-90 shadow-inner shadow-[var(--colorHeaderOutline)]"
+            className="w-32 lg:w-52 bg-white h-32 lg:h-52 rounded-[50%] flex justify-center items-center border-[1rem] lg:border-[2rem] border-[var(--colorScissors)] transition transform hover:scale-110 active:scale-90 shadow-inner shadow-[var(--colorHeaderOutline)]"
             onClick={() => escolher("tesoura")}
           >
-            <img src={data.iconScissor} alt="Scissors" />
+            <img src={data.iconScissor} className="lg:w-16" alt="Scissors" />
           </button>
         </div>
       </div>
       <div className="flex justify-center">
         <button
-          className="w-32 lg:w-56 bg-white h-32 lg:h-56 rounded-[50%] flex justify-center items-center border-[1rem] lg:border-[2rem] border-[var(--colorRock)] transition transform hover:scale-110 active:scale-90 shadow-inner shadow-[var(--colorHeaderOutline)]"
+          className="w-32 lg:w-52 bg-white h-32 lg:h-52 rounded-[50%] flex justify-center items-center border-[1rem] lg:border-[2rem] border-[var(--colorRock)] transition transform hover:scale-110 active:scale-90 shadow-inner shadow-[var(--colorHeaderOutline)]"
           onClick={() => escolher("pedra")}
         >
-          <img src={data.iconRock} alt="pedra" />
+          <img src={data.iconRock} className="lg:w-16" alt="pedra" />
         </button>
       </div>
     </div>

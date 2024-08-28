@@ -25,15 +25,15 @@ function Game({
 }: GameProps) {
   return (
     <>
-      <div className="flex justify-between w-full border-3 border-[var(--colorHeaderOutline)] rounded-lg p-3 items-center md:w-6/12">
+      <div className="flex justify-between w-full border-3 border-[var(--colorHeaderOutline)] rounded-lg p-3 items-center lg:w-6/12 lg:h-40">
         <div className="p-2">
-          <img src={data.iconLogo} alt="" className="w-28 lg:w-36" />
+          <img src={data.iconLogo} alt="" className="w-28 lg:w-44" />
         </div>
-        <div className="h-full bg-white flex flex-col w-24 items-center lg:w-32 py-3 rounded-md shadow-sm shadow-neutral-950">
-          <p className="text-[var(--colorScoreText)] text-xs font-bold">
+        <div className="h-full bg-white flex flex-col w-24 items-center lg:w-40 justify-center lg:border-1 lg:border-black py-3 rounded-md shadow-sm shadow-neutral-950">
+          <p className="text-[var(--colorScoreText)] text-xs font-bold lg:text-base">
             S C O R E
           </p>
-          <p className="text-[var(--colorDarkText)] text-5xl flex font-bold">
+          <p className="text-[var(--colorDarkText)] text-5xl lg:text-7xl flex font-bold">
             {score}
           </p>
         </div>

@@ -65,7 +65,7 @@ function App() {
                 color="primary"
                 variant="ghost"
                 onClick={activeRules}
-                className="rounded-lg text-[rgba(255, 255, 255, 0.692)] border-[rgba(255, 255, 255, 0.692)]"
+                className="rounded-lg text-white border-[rgba(255, 255, 255, 0.692)]"
               >
                 R U L E S
               </Button>
