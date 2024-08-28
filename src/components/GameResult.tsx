@@ -90,7 +90,7 @@ function GameResult({
           className="flex flex-col items-center gap-5"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
+          transition={{ duration: 0.8 }}
         >
           <motion.div
             className={`w-32 h-32 rounded-[50%] lg:w-56 lg:h-56 lg:border-[2rem] flex justify-center items-center bg-white border-[1rem] shadow-inner shadow-[var(--colorHeaderOutline)]`}
@@ -107,9 +107,9 @@ function GameResult({
                 src={iconEscolha(escolhaJ2)}
                 alt={`Escolha ${escolhaJ2}`}
                 className="transition-opacity duration-1000"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
+                initial={{ scale: 0.5 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.8 }}
               />
             )}
           </motion.div>
