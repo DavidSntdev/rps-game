@@ -11,6 +11,7 @@ interface GameProps {
   setEscolhaJ1: (escolha: string) => void;
   escolhaJ2: string;
   setEscolhaJ2: (random: string) => void;
+  language: string;
 }
 
 function Game({
@@ -22,6 +23,7 @@ function Game({
   setEscolhaJ1,
   escolhaJ2,
   setEscolhaJ2,
+  language,
 }: GameProps) {
   return (
     <>
@@ -31,7 +33,9 @@ function Game({
         </div>
         <div className="h-full bg-white flex flex-col w-24 items-center lg:w-40 justify-center lg:border-1 lg:border-black py-3 rounded-md shadow-sm shadow-neutral-950">
           <p className="text-[var(--colorScoreText)] text-xs font-bold lg:text-base">
-            S C O R E
+            {language === "en" && "S C O R E"}
+            {language === "pt" && "P O N T U A Ç Ã O"}
+            {language === "es" && "P U N T U A C I Ó N"}
           </p>
           <p className="text-[var(--colorDarkText)] text-5xl lg:text-7xl flex font-bold">
             {score}
@@ -45,6 +49,7 @@ function Game({
           setJogoAtivo={setJogoAtivo}
           score={score}
           setScore={setScore}
+          language={language}
         />
       ) : (
         <GamePlayJ1

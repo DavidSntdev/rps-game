@@ -16,15 +16,19 @@ import {
   selectNormal,
   selectPort,
   selectEng,
+  selectEsp,
 } from "./utils/settings";
 
-function Settings() {
+interface SettingsProps {
+  setLanguage: (value: string) => void;
+  language: string;
+}
+
+function Settings({ setLanguage, language }: SettingsProps) {
   const [selectedRobo, setSelectedRobo] = useState<boolean>(true);
   const [selectedPVP, setSelectedPVP] = useState<boolean>(false);
   const [selectedNormal, setSelectedNormal] = useState<boolean>(true);
   const [selectedBonus, setSelectedBonus] = useState<boolean>(false);
-  const [selectedPort, setSelectedPort] = useState<boolean>(false);
-  const [selectedEnglish, setSelectedEnglish] = useState<boolean>(true);
 
   return (
     <>
@@ -49,27 +53,49 @@ function Settings() {
           className="w-52 lg:w-64 py-3 px-3"
         >
           <DropdownSection
-            title="Settings Game"
+            title={
+              language === "en"
+                ? "Settings Game"
+                : language === "pt"
+                ? "Configurações do Jogo"
+                : "Configuraciones del Juego"
+            }
             classNames={{
               heading: "text-lg",
             }}
           >
             <DropdownItem
               key="PvAI"
-              description="Play with a robot"
+              description={
+                language === "en"
+                  ? "Play with a robot"
+                  : language === "pt"
+                  ? "Jogar com um robô"
+                  : "Jugar con un robot"
+              }
               endContent={<FaRobot size={30} />}
               classNames={{
                 base: `data-[selectable=true]:focus:bg-neutral-700 data-[hover=true]:bg-neutral-700 data-[focus-visible=true]:outline-white  ${
                   selectedRobo && "border-1 border-white"
                 }`,
               }}
-              onClick={() => selectRobo(setSelectedRobo, setSelectedPVP)}
+              onClick={() => selectRobo(setSelectedRobo, setSelectedRobo)}
             >
-              Player vs Robot
+              {language === "en"
+                ? "Player vs Robot"
+                : language === "pt"
+                ? "Jogador vs Robô"
+                : "Jugador vs Robot"}
             </DropdownItem>
             <DropdownItem
               key="PvP"
-              description="Play with a friend"
+              description={
+                language === "en"
+                  ? "Play with a friend"
+                  : language === "pt"
+                  ? "Jogar com um amigo"
+                  : "Jugar con un amigo"
+              }
               endContent={<FaUserFriends size={30} />}
               classNames={{
                 base: `data-[selectable=true]:focus:bg-neutral-700 data-[hover=true]:bg-neutral-700 data-[focus-visible=true]:outline-white ${
@@ -78,18 +104,34 @@ function Settings() {
               }}
               onClick={() => selectPVP(setSelectedPVP, setSelectedRobo)}
             >
-              Player vs Friend
+              {language === "en"
+                ? "Player vs Friend"
+                : language === "pt"
+                ? "Jogador vs Amigo"
+                : "Jugador vs Amigo"}
             </DropdownItem>
           </DropdownSection>
           <DropdownSection
-            title="Game Mode"
+            title={
+              language === "en"
+                ? "Game Mode"
+                : language === "pt"
+                ? "Modo de Jogo"
+                : "Modo de Juego"
+            }
             classNames={{
               heading: "text-lg",
             }}
           >
             <DropdownItem
               key={"Normal Mode"}
-              description="Play classic mode"
+              description={
+                language === "en"
+                  ? "Play classic mode"
+                  : language === "pt"
+                  ? "Jogar modo clássico"
+                  : "Jugar modo clásico"
+              }
               classNames={{
                 base: `data-[selectable=true]:focus:bg-neutral-700 data-[hover=true]:bg-neutral-700 data-[focus-visible=true]:outline-white ${
                   selectedNormal && "border-1 border-white"
@@ -97,11 +139,21 @@ function Settings() {
               }}
               onClick={() => selectNormal(setSelectedNormal, setSelectedBonus)}
             >
-              Normal Mode
+              {language === "en"
+                ? "Normal Mode"
+                : language === "pt"
+                ? "Modo Normal"
+                : "Modo Normal"}
             </DropdownItem>
             <DropdownItem
               key={"Bonus Mode"}
-              description="Play new mode"
+              description={
+                language === "en"
+                  ? "Play new mode"
+                  : language === "pt"
+                  ? "Jogar novo modo"
+                  : "Jugar nuevo modo"
+              }
               classNames={{
                 base: `data-[selectable=true]:focus:bg-neutral-700 data-[hover=true]:bg-neutral-700 data-[focus-visible=true]:outline-white ${
                   selectedBonus && "border-1 border-white"
@@ -109,11 +161,21 @@ function Settings() {
               }}
               onClick={() => selectBonus(setSelectedBonus, setSelectedNormal)}
             >
-              Bonus Mode
+              {language === "en"
+                ? "Bonus Mode"
+                : language === "pt"
+                ? "Modo Bônus"
+                : "Modo Bonus"}
             </DropdownItem>
           </DropdownSection>
           <DropdownSection
-            title="Language"
+            title={
+              language === "en"
+                ? "Language"
+                : language === "pt"
+                ? "Idioma"
+                : "Idioma"
+            }
             classNames={{
               heading: "text-lg",
             }}
@@ -123,26 +185,51 @@ function Settings() {
               shortcut="🇧🇷"
               classNames={{
                 base: `data-[selectable=true]:focus:bg-neutral-700 data-[hover=true]:bg-neutral-700 data-[focus-visible=true]:outline-white ${
-                  selectedPort && "border-1 border-white"
+                  language == "pt" && "border-1 border-white"
                 }`,
                 shortcut: "border-none",
               }}
-              onClick={() => selectPort(setSelectedPort, setSelectedEnglish)}
+              onClick={() => selectPort(setLanguage)}
             >
-              Portuguese
+              {language === "en"
+                ? "Portuguese"
+                : language === "pt"
+                ? "Português"
+                : "Portugués"}
             </DropdownItem>
             <DropdownItem
               key="Language US"
               shortcut="🇺🇸"
               classNames={{
                 base: `data-[selectable=true]:focus:bg-neutral-700 data-[hover=true]:bg-neutral-700 data-[focus-visible=true]:outline-white ${
-                  selectedEnglish && "border-1 border-white"
+                  language == "en" && "border-1 border-white"
                 }`,
                 shortcut: "border-none",
               }}
-              onClick={() => selectEng(setSelectedEnglish, setSelectedPort)}
+              onClick={() => selectEng(setLanguage)}
             >
-              English
+              {language === "en"
+                ? "English"
+                : language === "pt"
+                ? "Inglês"
+                : "Inglés"}
+            </DropdownItem>
+            <DropdownItem
+              key="Language ES"
+              shortcut="🇪🇸"
+              classNames={{
+                base: `data-[selectable=true]:focus:bg-neutral-700 data-[hover=true]:bg-neutral-700 data-[focus-visible=true]:outline-white ${
+                  language == "es" && "border-1 border-white"
+                }`,
+                shortcut: "border-none",
+              }}
+              onClick={() => selectEsp(setLanguage)}
+            >
+              {language === "en"
+                ? "Spanish"
+                : language === "pt"
+                ? "Espanhol"
+                : "Español"}
             </DropdownItem>
           </DropdownSection>
         </DropdownMenu>

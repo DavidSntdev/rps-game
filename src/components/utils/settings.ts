@@ -29,18 +29,14 @@ export const selectBonus = (
   normal(false);
 };
 
-export const selectPort = (
-  portugues: (value: boolean) => void,
-  ingles: (value: boolean) => void
-) => {
-  portugues(true);
-  ingles(false);
+export const selectPort = (language: (value: string) => void) => {
+  language("pt");
 };
 
-export const selectEng = (
-  ingles: (value: boolean) => void,
-  portugues: (value: boolean) => void
-) => {
-  ingles(true);
-  portugues(false);
+export const selectEng = (language: (value: string) => void) => {
+  language("en");
+};
+
+export const selectEsp = (language: (value: string) => void) => {
+  language("es");
 };
