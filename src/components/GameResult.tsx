@@ -54,8 +54,10 @@ function GameResult({
       <div className="flex justify-center items-start gap-12">
         <div className="flex flex-col items-center gap-5">
           <div
-            className="w-32 bg-white h-32 rounded-[50%]  lg:w-56 lg:h-56 lg:border-[2rem] flex justify-center items-center border-[1rem] transition-all transform duration-500 shadow-inner shadow-[var(--colorHeaderOutline)]"
-            style={{ borderColor: corEscolha(escolhaJ1) }}
+            className="w-32 bg-white h-32 rounded-[50%]  lg:w-56 lg:h-56 lg:border-[1.8rem] flex justify-center items-center border-[1rem] transition-all transform duration-500 shadow-[inset_0_14px_2px_-6px_var(--colorBtnShadow)]"
+            style={{
+              borderColor: corEscolha(escolhaJ1),
+            }}
           >
             <img src={iconEscolha(escolhaJ1)} alt={`Escolha ${escolhaJ1}`} />
           </div>
@@ -93,8 +95,10 @@ function GameResult({
           transition={{ duration: 0.8 }}
         >
           <motion.div
-            className={`w-32 h-32 rounded-[50%] lg:w-56 lg:h-56 lg:border-[2rem] flex justify-center items-center bg-white border-[1rem] shadow-inner shadow-[var(--colorHeaderOutline)]`}
-            style={{ borderColor: borderColor }}
+            className={`w-32 h-32 rounded-[50%] lg:w-56 lg:h-56 lg:border-[1.8rem] flex justify-center items-center bg-white border-[1rem] shadow-[inset_0_14px_2px_-6px_var(--colorBtnShadow)]`}
+            style={{
+              borderColor: borderColor,
+            }}
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{
               scale: showEscolhaJ2 ? 1 : 0.5,

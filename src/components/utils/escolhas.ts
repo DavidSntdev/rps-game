@@ -20,6 +20,7 @@ export const corEscolha = (escolha: string) => {
   }
 };
 
+
 export const escolhaRandom = () => {
   const n = Math.floor(Math.random() * 3);
   if (n === 0) {
