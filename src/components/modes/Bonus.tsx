@@ -2,11 +2,29 @@ import { data, dataBonus } from "../../data/data";
 import { escolhaRandomBonus } from "../utils/escolhas";
 import { ModesProps } from "../utils/interfaces";
 
-function Bonus({ setJogoAtivo, setEscolhaJ1, setEscolhaJ2 }: ModesProps) {
+function Bonus({
+  setJogoAtivo,
+  setEscolhaJ1,
+  setEscolhaJ2,
+  setTurno,
+  turno,
+  pvp,
+}: ModesProps) {
   const escolher = (escolha: string) => {
-    setEscolhaJ1(escolha);
-    setJogoAtivo(true);
-    setEscolhaJ2(escolhaRandomBonus());
+    if (pvp) {
+      if (turno === 1) {
+        setEscolhaJ1(escolha);
+        setTurno(2);
+      } else if (turno === 2) {
+        setEscolhaJ2(escolha);
+        setTurno(1);
+        setJogoAtivo(true);
+      }
+    } else {
+      setEscolhaJ1(escolha);
+      setJogoAtivo(true);
+      setEscolhaJ2(escolhaRandomBonus());
+    }
   };
   return (
     <div>

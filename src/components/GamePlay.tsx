@@ -1,21 +1,25 @@
+import { useState } from "react";
 import { data, dataBonus } from "../data/data";
 import { styleBackground } from "../data/style";
 import Bonus from "./modes/Bonus";
 import Normal from "./modes/Normal";
 
-interface GamePlayJ1Props {
+interface GamePlayProps {
   setJogoAtivo: (ativo: boolean) => void;
   setEscolhaJ1: (escolha: string) => void;
   setEscolhaJ2: (random: string) => void;
   mode: string;
+  pvp: boolean;
 }
 
-function GamePlayJ1({
+function GamePlay({
   setJogoAtivo,
   setEscolhaJ1,
   setEscolhaJ2,
   mode,
-}: GamePlayJ1Props) {
+  pvp,
+}: GamePlayProps) {
+  const [turno, setTurno] = useState<1 | 2>(1);
   const background = mode === "normal" ? data.bgTriangle : dataBonus.bgPentagon;
   return (
     <div
@@ -29,6 +33,9 @@ function GamePlayJ1({
           setJogoAtivo={setJogoAtivo}
           setEscolhaJ1={setEscolhaJ1}
           setEscolhaJ2={setEscolhaJ2}
+          setTurno={setTurno}
+          turno={turno}
+          pvp={pvp}
         />
       )}
       {mode === "bonus" && (
@@ -36,10 +43,13 @@ function GamePlayJ1({
           setJogoAtivo={setJogoAtivo}
           setEscolhaJ1={setEscolhaJ1}
           setEscolhaJ2={setEscolhaJ2}
+          setTurno={setTurno}
+          turno={turno}
+          pvp={pvp}
         />
       )}
     </div>
   );
 }
 
-export default GamePlayJ1;
+export default GamePlay;

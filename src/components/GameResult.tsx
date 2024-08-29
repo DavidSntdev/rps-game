@@ -18,6 +18,7 @@ interface GameResultProps {
   setScore: (score: number) => void;
   language: string;
   mode: string;
+  pvp: boolean;
 }
 
 function GameResult({
@@ -28,6 +29,7 @@ function GameResult({
   setScore,
   language,
   mode,
+  pvp,
 }: GameResultProps) {
   const [isGameover, setGameover] = useState<boolean>(false);
   const [showEscolhaJ2, setShowEscolhaJ2] = useState<boolean>(false);
@@ -91,9 +93,15 @@ function GameResult({
           </div>
           <div className="flex gap-2">
             <p>
-              {language === "en" && "Y O U"}
-              {language === "pt" && "V O C Ê"}
-              {language === "es" && "T Ú"}
+              {pvp
+                ? language === "en" && "P L A Y E R 1"
+                : language === "en" && "Y O U"}
+              {pvp
+                ? language === "pt" && "J O G A D O R 1"
+                : language === "pt" && "V O C Ê"}
+              {pvp
+                ? language === "es" && "J U G A D O R 1"
+                : language === "es" && "T Ú"}
             </p>
             <p>
               {language === "en" && "P I C K E D"}
@@ -174,16 +182,26 @@ function GameResult({
             )}
           </motion.div>
           <div className="flex flex-wrap gap-2 justify-center">
-            <p>
-              {language === "en" && "T H E"}
-              {language === "pt" && "A"}
-              {language === "es" && "L A"}
-            </p>
-            <p>
-              {language === "en" && "H O U S E"}
-              {language === "pt" && "C A S A"}
-              {language === "es" && "C A S A"}
-            </p>
+            {pvp ? (
+              <p>
+                {language === "en" && "P L A Y E R 2"}
+                {language === "pt" && "J O G A D O R 2"}
+                {language === "es" && "J U G A D O R 2"}
+              </p>
+            ) : (
+              <>
+                <p>
+                  {language === "en" && "T H E"}
+                  {language === "pt" && "A"}
+                  {language === "es" && "L A"}
+                </p>
+                <p>
+                  {language === "en" && "H O U S E"}
+                  {language === "pt" && "C A S A"}
+                  {language === "es" && "C A S A"}
+                </p>
+              </>
+            )}
             <p>
               {language === "en" && "P I C K E D"}
               {language === "pt" && "E S C O L H E U"}

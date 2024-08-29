@@ -2,11 +2,29 @@ import { data } from "../../data/data";
 import { escolhaRandom } from "../utils/escolhas";
 import { ModesProps } from "../utils/interfaces";
 
-function Normal({ setJogoAtivo, setEscolhaJ1, setEscolhaJ2 }: ModesProps) {
+function Normal({
+  setJogoAtivo,
+  setEscolhaJ1,
+  setEscolhaJ2,
+  setTurno,
+  turno,
+  pvp,
+}: ModesProps) {
   const escolher = (escolha: string) => {
-    setEscolhaJ1(escolha);
-    setJogoAtivo(true);
-    setEscolhaJ2(escolhaRandom());
+    if (pvp) {
+      if (turno === 1) {
+        setEscolhaJ1(escolha);
+        setTurno(2);
+      } else if (turno === 2) {
+        setEscolhaJ2(escolha);
+        setTurno(1);
+        setJogoAtivo(true);
+      }
+    } else {
+      setEscolhaJ1(escolha);
+      setJogoAtivo(true);
+      setEscolhaJ2(escolhaRandom());
+    }
   };
 
   return (

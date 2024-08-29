@@ -6,7 +6,6 @@ import {
   DropdownSection,
   DropdownItem,
 } from "@nextui-org/react";
-import { useState } from "react";
 import { DiAptana } from "react-icons/di";
 import { FaRobot, FaUserFriends } from "react-icons/fa";
 import {
@@ -24,12 +23,18 @@ interface SettingsProps {
   language: string;
   setMode: (value: string) => void;
   mode: string;
+  setIsPVP: (value: boolean) => void;
+  pvp: boolean;
 }
 
-function Settings({ setLanguage, language, setMode, mode }: SettingsProps) {
-  const [selectedRobo, setSelectedRobo] = useState<boolean>(true);
-  const [selectedPVP, setSelectedPVP] = useState<boolean>(false);
-
+function Settings({
+  setLanguage,
+  language,
+  setMode,
+  mode,
+  setIsPVP,
+  pvp,
+}: SettingsProps) {
   return (
     <>
       <Dropdown
@@ -65,7 +70,7 @@ function Settings({ setLanguage, language, setMode, mode }: SettingsProps) {
             }}
           >
             <DropdownItem
-              key="PvAI"
+              key="PvE"
               description={
                 language === "en"
                   ? "Play with a robot"
@@ -76,10 +81,10 @@ function Settings({ setLanguage, language, setMode, mode }: SettingsProps) {
               endContent={<FaRobot size={30} />}
               classNames={{
                 base: `data-[selectable=true]:focus:bg-neutral-700 data-[hover=true]:bg-neutral-700 data-[focus-visible=true]:outline-white  ${
-                  selectedRobo && "border-1 border-white"
+                  !pvp && "border-1 border-white"
                 }`,
               }}
-              onClick={() => selectRobo(setSelectedRobo, setSelectedPVP)}
+              onClick={() => selectRobo(setIsPVP)}
             >
               {language === "en"
                 ? "Player vs Robot"
@@ -99,10 +104,10 @@ function Settings({ setLanguage, language, setMode, mode }: SettingsProps) {
               endContent={<FaUserFriends size={30} />}
               classNames={{
                 base: `data-[selectable=true]:focus:bg-neutral-700 data-[hover=true]:bg-neutral-700 data-[focus-visible=true]:outline-white ${
-                  selectedPVP && "border-1 border-white"
+                  pvp && "border-1 border-white"
                 }`,
               }}
-              onClick={() => selectPVP(setSelectedPVP, setSelectedRobo)}
+              onClick={() => selectPVP(setIsPVP)}
             >
               {language === "en"
                 ? "Player vs Friend"

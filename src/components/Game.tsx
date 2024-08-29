@@ -1,5 +1,5 @@
 import { data, dataBonus } from "../data/data";
-import GamePlayJ1 from "./GamePlayJ1";
+import GamePlay from "./GamePlay";
 import GameResult from "./GameResult";
 
 interface GameProps {
@@ -13,6 +13,7 @@ interface GameProps {
   escolhaJ2: string;
   language: string;
   mode: string;
+  pvp: boolean;
 }
 
 function Game({
@@ -26,6 +27,7 @@ function Game({
   setEscolhaJ2,
   language,
   mode,
+  pvp,
 }: GameProps) {
   return (
     <>
@@ -58,13 +60,15 @@ function Game({
           setScore={setScore}
           language={language}
           mode={mode}
+          pvp={pvp}
         />
       ) : (
-        <GamePlayJ1
+        <GamePlay
           setJogoAtivo={setJogoAtivo}
           setEscolhaJ1={setEscolhaJ1}
           setEscolhaJ2={setEscolhaJ2}
           mode={mode}
+          pvp={pvp}
         />
       )}
     </>

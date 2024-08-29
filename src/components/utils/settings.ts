@@ -1,17 +1,9 @@
-export const selectRobo = (
-  robo: (value: boolean) => void,
-  pvp: (value: boolean) => void
-) => {
-  robo(true);
+export const selectRobo = (pvp: (value: boolean) => void) => {
   pvp(false);
 };
 
-export const selectPVP = (
-  pvp: (value: boolean) => void,
-  robo: (value: boolean) => void
-) => {
+export const selectPVP = (pvp: (value: boolean) => void) => {
   pvp(true);
-  robo(false);
 };
 
 export const modeNormal = (mode: (value: string) => void) => {
