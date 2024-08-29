@@ -52,31 +52,57 @@ function Game({
             <img src={dataBonus.iconLogo} alt="" className="w-24 lg:w-32" />
           )}
         </div>
-        <div className="h-full bg-white flex flex-col w-24 items-center lg:w-40 justify-center lg:border-1 lg:border-black py-3 rounded-md shadow-sm shadow-neutral-950">
-          {pvp ? (
-            <p className="text-[var(--colorScoreText)] text-xs font-bold lg:text-lg">
-              {language === "en" && "S C O R E B O A R D"}
-              {language === "pt" && "P L A C A R"}
-              {language === "es" && "M A R C A D O R"}
-            </p>
-          ) : (
-            <p className="text-[var(--colorScoreText)] text-xs font-bold lg:text-base">
-              {language === "en" && "S C O R E"}
-              {language === "pt" && "P O N T U A Ç Ã O"}
-              {language === "es" && "P U N T U A C I Ó N"}
-            </p>
+        <div className="flex h-full gap-3">
+          {pvp && !isJogoAtivo && (
+            <div className="h-full bg-white flex flex-col w-24 items-center lg:w-40 justify-center lg:border-1 lg:border-black py-3 rounded-md shadow-sm shadow-neutral-950">
+              <p className="text-[var(--colorScoreText)] text-xs font-bold lg:text-lg">
+                {language === "en"
+                  ? "Turn:"
+                  : language === "pt"
+                  ? "Turno :"
+                  : "Turno :"}
+              </p>
+              <p className="text-1xl lg:text-2xl flex font-bold text-[var(--colorDarkText)]">
+                {turno === 1
+                  ? language === "en"
+                    ? "Player 1"
+                    : language === "pt"
+                    ? "Jogador 1"
+                    : "Jugador 1"
+                  : language === "en"
+                  ? "Player 2"
+                  : language === "pt"
+                  ? "Jogador 2"
+                  : "Jugador 2"}
+              </p>
+            </div>
           )}
-          {pvp ? (
-            <p className="text-3xl lg:text-5xl flex font-bold text-[var(--colorDarkText)] gap-2">
-              {scoreJ1}
-              <span className="text-blue-900"> x </span>
-              {scoreJ2}
-            </p>
-          ) : (
-            <p className="text-[var(--colorDarkText)] text-5xl lg:text-7xl flex font-bold">
-              {score}
-            </p>
-          )}
+          <div className="h-full bg-white flex flex-col w-24 items-center lg:w-40 justify-center lg:border-1 lg:border-black py-3 rounded-md shadow-sm shadow-neutral-950">
+            {pvp ? (
+              <p className="text-[var(--colorScoreText)] text-xs font-bold lg:text-lg">
+                {language === "en" && "S C O R E B O A R D"}
+                {language === "pt" && "P L A C A R"}
+                {language === "es" && "M A R C A D O R"}
+              </p>
+            ) : (
+              <p className="text-[var(--colorScoreText)] text-xs font-bold lg:text-base">
+                {language === "en" && "S C O R E"}
+                {language === "pt" && "P O N T U A Ç Ã O"}
+                {language === "es" && "P U N T U A C I Ó N"}
+              </p>
+            )}
+            {pvp ? (
+              <p className="text-3xl lg:text-5xl flex font-bold text-[var(--colorDarkText)] gap-2">
+                {scoreJ1}
+                <span className="text-blue-900"> x </span>
+                {scoreJ2}
+              </p>
+            ) : (
+              <p className="text-[var(--colorDarkText)] text-5xl lg:text-7xl flex font-bold">
+                {score}
+              </p>
+            )}
+          </div>
         </div>
       </div>
       {isJogoAtivo ? (
