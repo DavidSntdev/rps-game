@@ -11,27 +11,35 @@ import { Button } from "@nextui-org/react";
 import { motion } from "framer-motion";
 
 interface GameResultProps {
+  setJogoAtivo: (ativo: boolean) => void;
+  setScore: (score: number) => void;
+  setScoreJ1: (score: number) => void;
+  setScoreJ2: (score: number) => void;
   escolhaJ1: string;
   escolhaJ2: string;
-  setJogoAtivo: (ativo: boolean) => void;
-  score: number;
-  setScore: (score: number) => void;
   language: string;
+  score: number;
+  scoreJ1: number;
+  scoreJ2: number;
   mode: string;
   pvp: boolean;
 }
 
 function GameResult({
+  setJogoAtivo,
+  setScore,
+  setScoreJ1,
+  setScoreJ2,
   escolhaJ1,
   escolhaJ2,
-  setJogoAtivo,
   score,
-  setScore,
+  scoreJ1,
+  scoreJ2,
   language,
   mode,
   pvp,
 }: GameResultProps) {
-  const [isGameover, setGameover] = useState<boolean>(false);
+  const [isGameover, setGameover] = useState<boolean>(false); // tirar depois, ta resetando toda hora que mete rules
   const [showEscolhaJ2, setShowEscolhaJ2] = useState<boolean>(false);
   const [borderColor, setBorderColor] = useState<string>("");
   const borderJ1 =
@@ -67,9 +75,29 @@ function GameResult({
   const terminarJogo = () => {
     setJogoAtivo(false);
     if (mode === "normal") {
-      winorlose(escolhaJ1, escolhaJ2, score, setScore);
+      winorlose(
+        pvp,
+        escolhaJ1,
+        escolhaJ2,
+        score,
+        scoreJ1,
+        scoreJ2,
+        setScore,
+        setScoreJ1,
+        setScoreJ2
+      );
     } else {
-      winorloseBonus(escolhaJ1, escolhaJ2, score, setScore);
+      winorloseBonus(
+        pvp,
+        escolhaJ1,
+        escolhaJ2,
+        score,
+        scoreJ1,
+        scoreJ2,
+        setScore,
+        setScoreJ1,
+        setScoreJ2
+      );
     }
   };
 
@@ -94,19 +122,19 @@ function GameResult({
           <div className="flex gap-2">
             <p>
               {pvp
-                ? language === "en" && "P L A Y E R 1"
+                ? language === "en" && "P L A Y E R"
                 : language === "en" && "Y O U"}
               {pvp
-                ? language === "pt" && "J O G A D O R 1"
+                ? language === "pt" && "J O G A D O R"
                 : language === "pt" && "V O C Ê"}
               {pvp
-                ? language === "es" && "J U G A D O R 1"
+                ? language === "es" && "J U G A D O R"
                 : language === "es" && "T Ú"}
             </p>
             <p>
-              {language === "en" && "P I C K E D"}
-              {language === "pt" && "E S C O L H E U"}
-              {language === "es" && "E S C O G I Ó"}
+              {pvp ? "1" : language === "en" && "P I C K E D"}
+              {pvp ? "" : language === "pt" && "E S C O L H E U"}
+              {pvp ? "" : language === "es" && "E S C O G I Ó"}
             </p>
           </div>
         </div>
@@ -119,8 +147,8 @@ function GameResult({
           >
             <p className="text-6xl text-slate-100">
               {mode === "normal"
-                ? resultado(escolhaJ1, escolhaJ2, language)
-                : resultadoBonus(escolhaJ1, escolhaJ2, language)}
+                ? resultado(escolhaJ1, escolhaJ2, language, pvp)
+                : resultadoBonus(escolhaJ1, escolhaJ2, language, pvp)}
             </p>
             <Button
               color="primary"
@@ -184,9 +212,9 @@ function GameResult({
           <div className="flex flex-wrap gap-2 justify-center">
             {pvp ? (
               <p>
-                {language === "en" && "P L A Y E R 2"}
-                {language === "pt" && "J O G A D O R 2"}
-                {language === "es" && "J U G A D O R 2"}
+                {language === "en" && "P L A Y E R"}
+                {language === "pt" && "J O G A D O R"}
+                {language === "es" && "J U G A D O R"}
               </p>
             ) : (
               <>
@@ -203,9 +231,9 @@ function GameResult({
               </>
             )}
             <p>
-              {language === "en" && "P I C K E D"}
-              {language === "pt" && "E S C O L H E U"}
-              {language === "es" && "E L E G I D A"}
+              {pvp ? "2" : language === "en" && "P I C K E D"}
+              {pvp ? "" : language === "pt" && "E S C O L H E U"}
+              {pvp ? "" : language === "es" && "E L E G I D A"}
             </p>
           </div>
         </motion.div>
@@ -217,10 +245,10 @@ function GameResult({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.25 }}
         >
-          <p className="text-6xl text-slate-100">
+          <p className="text-6xl text-slate-100 text-center">
             {mode === "normal"
-              ? resultado(escolhaJ1, escolhaJ2, language)
-              : resultadoBonus(escolhaJ1, escolhaJ2, language)}
+              ? resultado(escolhaJ1, escolhaJ2, language, pvp)
+              : resultadoBonus(escolhaJ1, escolhaJ2, language, pvp)}
           </p>
           <Button
             color="primary"

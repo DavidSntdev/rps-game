@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { data, dataBonus } from "../data/data";
 import { styleBackground } from "../data/style";
 import Bonus from "./modes/Bonus";
@@ -8,6 +7,8 @@ interface GamePlayProps {
   setJogoAtivo: (ativo: boolean) => void;
   setEscolhaJ1: (escolha: string) => void;
   setEscolhaJ2: (random: string) => void;
+  setTurno: React.Dispatch<React.SetStateAction<1 | 2>>;
+  turno: 1 | 2;
   mode: string;
   pvp: boolean;
 }
@@ -16,10 +17,11 @@ function GamePlay({
   setJogoAtivo,
   setEscolhaJ1,
   setEscolhaJ2,
+  setTurno,
+  turno,
   mode,
   pvp,
 }: GamePlayProps) {
-  const [turno, setTurno] = useState<1 | 2>(1);
   const background = mode === "normal" ? data.bgTriangle : dataBonus.bgPentagon;
   return (
     <div

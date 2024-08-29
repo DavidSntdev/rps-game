@@ -10,6 +10,9 @@ import axios from "axios";
 function App() {
   const [isRulesActive, setRulesActive] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
+  const [scoreJ1, setScoreJ1] = useState<number>(0);
+  const [scoreJ2, setScoreJ2] = useState<number>(0);
+  const [turno, setTurno] = useState<1 | 2>(1);
   const [isJogoAtivo, setJogoAtivo] = useState<boolean>(false);
   const [escolhaJ1, setEscolhaJ1] = useState<string>("");
   const [escolhaJ2, setEscolhaJ2] = useState<string>("");
@@ -74,17 +77,23 @@ function App() {
         ) : (
           <>
             <Game
-              score={score}
               setScore={setScore}
-              isJogoAtivo={isJogoAtivo}
+              setScoreJ1={setScoreJ1}
+              setScoreJ2={setScoreJ2}
               setJogoAtivo={setJogoAtivo}
-              escolhaJ1={escolhaJ1}
               setEscolhaJ1={setEscolhaJ1}
-              escolhaJ2={escolhaJ2}
               setEscolhaJ2={setEscolhaJ2}
+              setTurno={setTurno}
+              turno={turno}
+              score={score}
+              scoreJ1={scoreJ1}
+              scoreJ2={scoreJ2}
+              isJogoAtivo={isJogoAtivo}
+              pvp={isPVP}
+              escolhaJ1={escolhaJ1}
+              escolhaJ2={escolhaJ2}
               language={language}
               mode={mode}
-              pvp={isPVP}
             />
             <div className="flex gap-3 mb-8 px-8 py-2 lg:px-12 lg:mb-0 md:self-end">
               <Settings

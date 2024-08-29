@@ -1,8 +1,13 @@
 export const winorloseBonus = (
+  pvp: boolean,
   j1: string,
   j2: string,
   score: number,
-  setScore: (score: number) => void
+  scoreJ1: number,
+  scoreJ2: number,
+  setScore: (score: number) => void,
+  setScoreJ1: (score: number) => void,
+  setScoreJ2: (score: number) => void
 ) => {
   if (j1 !== j2) {
     if (
@@ -17,16 +22,27 @@ export const winorloseBonus = (
       (j1 === "lizard" && j2 === "spock") ||
       (j1 === "lizard" && j2 === "papel")
     ) {
-      setScore(score + 1);
+      if (pvp) {
+        setScoreJ1(scoreJ1 + 1);
+      } else {
+        setScore(score + 1);
+      }
     } else {
-      if (score > 0) {
+      if (pvp) {
+        setScoreJ2(scoreJ2 + 1);
+      } else if (score > 0) {
         setScore(score - 1);
       }
     }
   }
 };
 
-export const resultadoBonus = (j1: string, j2: string, language: string) => {
+export const resultadoBonus = (
+  j1: string,
+  j2: string,
+  language: string,
+  pvp: boolean
+) => {
   if (j1 === j2) {
     if (language === "en") {
       return "DRAW";
@@ -49,24 +65,48 @@ export const resultadoBonus = (j1: string, j2: string, language: string) => {
     (j1 === "lizard" && j2 === "spock") ||
     (j1 === "lizard" && j2 === "papel")
   ) {
-    if (language === "en") {
-      return "YOU WIN";
-    }
-    if (language === "pt") {
-      return "VOCÊ GANHOU";
-    }
-    if (language === "es") {
-      return "TU GANASTE";
+    if (pvp) {
+      if (language === "en") {
+        return "PLAYER 1 WON";
+      }
+      if (language === "pt") {
+        return "JOGADOR 1 GANHOU";
+      }
+      if (language === "es") {
+        return "JUGADOR 1 GANÓ";
+      }
+    } else {
+      if (language === "en") {
+        return "YOU WIN";
+      }
+      if (language === "pt") {
+        return "VOCÊ GANHOU";
+      }
+      if (language === "es") {
+        return "TU GANASTE";
+      }
     }
   } else {
-    if (language === "en") {
-      return "YOU LOSE";
-    }
-    if (language === "pt") {
-      return "VOCÊ PERDEU";
-    }
-    if (language === "es") {
-      return "TU PERDISTE";
+    if (pvp) {
+      if (language === "en") {
+        return "PLAYER 2 WON";
+      }
+      if (language === "pt") {
+        return "JOGADOR 2 GANHOU";
+      }
+      if (language === "es") {
+        return "JUGADOR 2 GANÓ";
+      }
+    } else {
+      if (language === "en") {
+        return "YOU LOSE";
+      }
+      if (language === "pt") {
+        return "VOCÊ PERDEU";
+      }
+      if (language === "es") {
+        return "TU PERDISTE";
+      }
     }
   }
 };
