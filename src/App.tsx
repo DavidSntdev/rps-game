@@ -9,9 +9,15 @@ import axios from "axios";
 
 function App() {
   const [isRulesActive, setRulesActive] = useState<boolean>(false);
-  const [score, setScore] = useState<number>(0);
-  const [scoreJ1, setScoreJ1] = useState<number>(0);
-  const [scoreJ2, setScoreJ2] = useState<number>(0);
+  const [score, setScore] = useState<number>(
+    () => Number(localStorage.getItem("score")) || 0
+  );
+  const [scoreJ1, setScoreJ1] = useState<number>(
+    () => Number(localStorage.getItem("scoreJ1")) || 0
+  );
+  const [scoreJ2, setScoreJ2] = useState<number>(
+    () => Number(localStorage.getItem("scoreJ2")) || 0
+  );
   const [turno, setTurno] = useState<1 | 2>(1);
   const [isJogoAtivo, setJogoAtivo] = useState<boolean>(false);
   const [escolhaJ1, setEscolhaJ1] = useState<string>("");
@@ -39,6 +45,12 @@ function App() {
 
     fetchCountry();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("score", String(score));
+    localStorage.setItem("scoreJ1", String(scoreJ1));
+    localStorage.setItem("scoreJ2", String(scoreJ2));
+  }, [score, scoreJ1, scoreJ2]);
 
   return (
     <main
