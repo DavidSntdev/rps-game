@@ -1,10 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GrClose } from "react-icons/gr";
 import { Button } from "@nextui-org/react";
 import { data, dataBonus } from "./data/data";
 import Game from "./components/Game";
 import Settings from "./components/Settings";
+import axios from "axios";
 
 function App() {
   const [isRulesActive, setRulesActive] = useState<boolean>(false);
@@ -14,12 +15,27 @@ function App() {
   const [escolhaJ2, setEscolhaJ2] = useState<string>("");
   const [language, setLanguage] = useState<string>("en");
   const [mode, setMode] = useState<string>("normal");
+  const [isPVP, setIsPVP] = useState<boolean>(false);
 
   const activeRules = () => {
     setRulesActive(!isRulesActive);
   };
 
   const imgRules = mode === "normal" ? data.imgRules : dataBonus.rules;
+
+  useEffect(() => {
+    const fetchCountry = async () => {
+      try {
+        const response = await axios.get(`https://ipapi.co/json/`);
+        const country = response.data.country_name;
+        setLanguage(country === "Brazil" ? "pt" : "en");
+      } catch (error) {
+        console.error("Error fetching country data", error);
+      }
+    };
+
+    fetchCountry();
+  }, []);
 
   return (
     <main
@@ -68,6 +84,7 @@ function App() {
               setEscolhaJ2={setEscolhaJ2}
               language={language}
               mode={mode}
+              pvp={isPVP}
             />
             <div className="flex gap-3 mb-8 px-8 py-2 lg:px-12 lg:mb-0 md:self-end">
               <Settings
@@ -75,6 +92,8 @@ function App() {
                 language={language}
                 setMode={setMode}
                 mode={mode}
+                setIsPVP={setIsPVP}
+                pvp={isPVP}
               />
               <Button
                 color="primary"
